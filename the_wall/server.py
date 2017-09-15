@@ -103,6 +103,7 @@ def msg_route():
             'message': newmsg,
     }
     mysql.query_db(query, data)
+    session['status'] = ''
     return redirect('/wall')
 
 @app.route('/postcmt', methods=['POST'])
@@ -116,6 +117,7 @@ def cmt_route():
             'comment': newcmt
     }
     mysql.query_db(query, data)
+    session['status'] = ''
     return redirect('/wall')
 
 @app.route('/logout')
@@ -123,6 +125,7 @@ def logout_route():
     if 'user' in session:
         del session['user']
     session['login'] = True
+    session['status'] = ''
     return redirect('/')
 
 app.run(debug=True)
