@@ -108,9 +108,11 @@ def msg_route():
 @app.route('/postcmt', methods=['POST'])
 def cmt_route():
     newcmt = request.form['comment']
-    query = 'INSERT INTO comments (user_id, comment, created_at, updated_at) VALUES (:user, :comment, NOW(), NOW())'
+    msg_id = request.form['msg_id']
+    query = 'INSERT INTO comments (user_id, message_id, comment, created_at, updated_at) VALUES (:user, :msg_id, :comment, NOW(), NOW())'
     data = {
             'user': session['user']['id'],
+            'msg_id': msg_id,
             'comment': newcmt
     }
     mysql.query_db(query, data)

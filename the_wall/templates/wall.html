@@ -23,11 +23,11 @@
       <input class="button-primary" type="submit" value="Post a message">
     </form>
       {% for msg in msgs %}
-          <h5>{{ msg['first_name'] }} {{ msg['last_name' ]}} - {{ msg['date'] }}</h5>
+          <h5>{{ msg['first_name'] }} {{ msg['last_name'] }} - {{ msg['date'] }}</h5>
           <p>{{ msg['message'] }}</p>
           <form action="/postcmt" method="post">
             <div class="row">
-              <input type="hidden" ondragover="">
+              <input type="hidden" name="msg_id" value="{{ msg['id'] }}">
               <label for="comment">Post a comment</label>
               <textarea name="comment" rows="6" cols="60" id="comment"></textarea>
             </div>
