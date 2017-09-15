@@ -34,7 +34,8 @@
             <input class="button" type="submit" value="Post a comment">
           </form>
           {% for cmt in cmtobj[msg['id']] %}
-            {{ cmt }}
+            <p>{{ cmt['first_name'] }} {{ cmt['last_name' ]}} - {{ cmt['date'] }}</p>
+            <p>{{ cmt['comment'] }}</p>
           {% endfor %}
       {% endfor %}
   </main>

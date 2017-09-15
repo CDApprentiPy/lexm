@@ -83,14 +83,15 @@ def login_route():
 def wall_route():
     query = 'SELECT messages.id, first_name, last_name, message, DATE_FORMAT(messages.created_at, "%M %D %Y") AS date FROM messages JOIN users ON users.id = messages.user_id'
     msgs = mysql.query_db(query)
-    query2 = 'SELECT messages.id, first_name, last_name, comment, DATE_FORMAT(comments.created_at, "%M %D %Y") AS date FROM comments JOIN messages ON messages.id = comments.message_id JOIN users ON users.id = comments.user_id'
+    query2 = 'SELECT message_id, first_name, last_name, comment, DATE_FORMAT(comments.created_at, "%M %D %Y") AS date FROM comments JOIN messages ON messages.id = comments.message_id JOIN users ON users.id = comments.user_id'
     cmts = mysql.query_db(query2)
     cmtobj = {}
     for cmt in cmts:
         print cmt
-        if not cmt['message.id'] in cmtobj:
-            cmtobj['message.id'] = []
-        cmtobj['message.id'].push(cmt)
+        if not cmt['message_id'] in cmtobj:
+            cmtobj[cmt['message_id']] = []
+        cmtobj[cmt['message_id']].append(cmt)
+    print cmtobj
     return render_template('wall.html', msgs=msgs, cmtobj=cmtobj)
 
 @app.route('/postmsg', methods=['POST'])
