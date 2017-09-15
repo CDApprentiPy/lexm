@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  <title>CodingDojo Wall</title>
+</head>
+<body>
+  <header class="row">
+    <h3 class="six columns">CodingDojo Wall</h3>
+    <h5 class="three columns">Welcome {{ session['user']['first_name'] }}</h5>
+    <h5><a href="/logout">log off</a></h5>
+  </header>
+  <main>
+    {% if session['status'] == 'new' %}
+      <p>Registration successful! Welcome!</p>
+    {% endif %}
+    <form action="/postmsg" method="post">
+      <div class="row">
+        <label for="message">Post a message</label>
+        <textarea name="message" rows="8" cols="80" id="message"></textarea>
+      </div>
+      <input class="button-primary" type="submit" value="Post a message">
+    </form>
+      {% for msg in msgs %}
+          <h5>{{ msg['first_name'] }} {{ msg['last_name' ]}} - {{ msg['date'] }}</h5>
+          <p>{{ msg['message'] }}</p>
+          <form action="/postcmt" method="post">
+            <div class="row">
+              <input type="hidden" ondragover="">
+              <label for="comment">Post a comment</label>
+              <textarea name="comment" rows="6" cols="60" id="comment"></textarea>
+            </div>
+            <input class="button" type="submit" value="Post a comment">
+          </form>
+          {% for cmt in cmtobj[msg['id']] %}
+            {{ cmt }}
+          {% endfor %}
+      {% endfor %}
+  </main>
+</body>
+</html>
