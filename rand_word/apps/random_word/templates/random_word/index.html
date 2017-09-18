@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'random_word/css/style.css' %}" media="screen" charset="utf-8">
+  <title>Random Word Generator</title>
+</head>
+<body>
+  <main>
+    <h4>Random Word (attempt #{{attempt}})</h4>
+    <h2>{{randword}}</h2>
+    <form action="/">
+      <input type="submit" value="Generate">
+    </form>
+    <form action="/reset">
+      <input type="submit" value="Reset">
+    </form>
+  </main>
+</body>
+</html>
