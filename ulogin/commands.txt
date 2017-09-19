@@ -1,0 +1,21 @@
+User.objects.all()
+from apps.user_login.models import *
+User.objects.all()
+User.objects.create(first_name="Lex", last_name="Myers", email_address="lex_not_real@smail.com", age=55)
+User.objects.create(first_name="Fred", last_name="Flintstone", email_address="fredf@slate.com", age=44)
+User.objects.create(first_name="Justin", last_name="Beiber", email_address="justin@jb.com", age=22)
+User.objects.all()
+User.objects.last()
+User.objects.order_by('-first_name')
+User.objects.get(id=3)
+User.objects.get(id=3).first_name
+User.objects.get(id=3).last_name = "Timberlake"
+U = User.objects.get(id=3)
+U.last_name
+U.last_name = "Timberlake"
+U.save()
+User.objects.get(id=3).last_name
+User.objects.create(first_name="Elvis", last_name="Presley", email_address="elvis@rca.com", age=82)
+User.objects.get(id=4).last_name
+U2 = User.objects.get(id=4)
+U2.delete()
