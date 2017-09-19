@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'session_words/css/style.css' %}" media="screen" charset="utf-8">
+  <title>Session Words</title>
+</head>
+<body>
+  <main class="rows">
+    <div class="six columns">
+      <form action="/addword" method="POST">
+        {% csrf_token %}
+        <h3>Add a new word</h3>
+        <input type="text" name="new_word">
+        <label>
+          <input type="radio" name="color" value="red">Red
+        </label>
+        <label>
+          <input type="radio" name="color" value="green">Green
+        </label>
+        <label>
+          <input type="radio" name="color" value="blue">Blue
+        </label>
+        <label>
+          <input type="checkbox" name="bigtext" >show in BIG fonts!
+        </label>
+        <input type="submit" value="Add to Session">
+      </form>
+    </div>
+    <div class="six columns">
+      <form action="/clear">
+        <input type="submit" value="Clear Session">
+      </form>
+      {% for entry in entries %}
+                <p><span class="{{entry.color}} {{entry.big}}">{{entry.word}}</span> - Added on {{entry.time}}</p>
+      {% endfor %}
+    </div>
+  </main>
+</body>
+</html>
