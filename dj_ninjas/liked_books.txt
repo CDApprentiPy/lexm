@@ -1,0 +1,29 @@
+User.objects.create(first_name="Maynard", last_name="Krebs", email="mk@mail.org")
+User.objects.create(first_name="Gerald", last_name="Jackson", email="why_or@whynot.com")
+User.objects.create(first_name="Jim", last_name="Jones", email="which_or@where.com")
+Book.objects.create(name="The Tao of Physics", desc="lots of woo woo", uploaded_by=User.objects.get(id=1))
+Book.objects.create(name="Cosmos", desc="A stone solid classic", uploaded_by=User.objects.get(id=1))
+Book.objects.create(name="Atlas Shrugged", desc="makes a good paperweight", uploaded_by=User.objects.get(i
+d=2))
+Book.objects.create(name="The Wealth of Nations", desc="great for kindling", uploaded_by=User.objects.get(
+id=2))
+Book.objects.create(name="Born to Run", desc="Springsteen is awesome", uploaded_by=User.objects.get(id=3))
+Book.objects.create(name="James Brown", desc="A solid biography", uploaded_by=User.objects.get(id=3))
+history
+User.objects.get(id=1).liked_books.add(Books.objects.first())
+User.objects.get(id=1).liked_books.add(Book.objects.first())
+User.objects.get(id=1).liked_books.add(Book.objects.last())
+User.objects.get(id=2).liked_books.add(Book.objects.get(id=1))
+User.objects.get(id=2).liked_books.add(Book.objects.get(id=3))
+User.objects.get(id=3).liked_books.add(Book.objects.all())
+for bk in Book.objects.all():User.objects.get(id=3).liked_books.add(bk)
+for usr in Book.objects.first().liked_users.all():
+    print usr.first_name, usr.last_name
+B1by = Book.objects.first().uploaded_by
+B1by.first_name
+B1by.last_name
+B2by = Book.objects.get(id=2).uploaded_by
+for usr in Book.objects.get(id=2).liked_users.all():
+    print usr.first_name, usr.last_name
+B2by.first_name
+B2by.last_name
