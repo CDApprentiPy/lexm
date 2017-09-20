@@ -1,0 +1,48 @@
+from apps.books_authors.models import *
+Author.objects.all()
+Book.objects.first().author
+Book.objects.first().authors
+Book.objects.first().authors.add(Author.objects.get(id=1))
+Book.objects.get(id=2).authors.add(Author.objects.get(id=1))
+Book.objects.filter(id__lte=3)
+Book.objects.filter(id__lte=3).authors
+for bk in Book.objects.filter(id__lte=3):
+    bk.authors.add(Author.objects.get(id=2))
+for bk in Book.objects.filter(id__lte=4):
+    bk.authors.add(Author.objects.get(id=3))
+for bk in Book.objects.all():
+    bk.authors.add(Author.objects.get(id=4))
+Book.objects.get(id=3).authors
+Book.objects.get(id=3).authors.clear()
+Book.objects.get(id=3).authors.add(Author.objects.get(id=2))
+Book.objects.get(id=3).authors.add(Author.objects.get(id=3))
+Book.objects.get(id=3).authors.add(Author.objects.get(id=4))
+Book.objects.get(id=3).authors
+list(Book.objects.get(id=3).authors)
+for author in Book.objects.get(id=3).authors:
+    print author
+Book.objects.get(id=3).authors
+Book.objects.get(id=3).authors.first_name
+Book.objects.all().save()
+Book.objects.save()
+Book.objects.get(id=3).authors
+Book.objects.get(id=3).authors.all()
+for auth in Book.objects.get(id=3).authors.all():
+    print auth.first_name
+for auth in Book.objects.get(id=3).authors.all():
+    print auth.id
+Book.objects.get(id=3).authors.remove(id=2)
+Book.objects.get(id=3).authors.remove(Author.objects.get(id=2))
+for auth in Book.objects.get(id=3).authors.all():
+    print auth.id
+Book.objects.get(id=2).authors.add(Author.objects.get(id=5))
+for bk in
+for bk in Authors.objects.get(id=3).books.all():
+    print bk.name
+for bk in Author
+.objects.get(id=3).books.all():
+    print bk.name
+for bk in Author.objects.get(id=3).books.all():
+    print bk.name
+for bk in Author.objects.get(id=2).books.all():
+    print bk.name

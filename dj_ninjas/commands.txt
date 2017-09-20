@@ -1,5 +1,41 @@
-from django.conf.urls import url
-from . import views
-urlpatterns = [
-    url(r'^$', views.dojo),
-]
+from apps.dojo_ninjas.models import *
+Dojo.objects.create(name="CodingDojo Silicon Valley", city="Mountain View", state="CA")
+Dojo.objects.create(name="CodingDojo Seattle", city="Seattle", state="WA")
+Dojo.objects.create(name="CodingDojo New York", city="New York", state="NY")
+Dojo.objects.delete(city="Seattle")
+D2 = Dojo.objects.get(city="Seattle")
+D2.name
+D2.delete()
+D2 = Dojo.objects.get(id=1)
+d2.name
+D2.name
+D2.delete()
+D = Dojo.objects.get(state="NY")
+D.delete()
+Dojo.objects.all()
+Dojo.objects.create(name="CodingDojo Silicon Valley", city="Mountain View", state="CA")
+Dojo.objects.create(name="CodingDojo Seattle", city="Seattle", state="WA")
+Dojo.objects.create(name="CodingDojo New York", city="New York", state="NY")
+Dojo.objects.first()
+Dojo.objects.first().id
+Ninja.objects.create(dojo=Dojo.objects.first().id, first_name="Jon", last_name="Snow")
+Ninja.objects.create(dojo=Dojo.objects.first(), first_name="Jon", last_name="Snow")
+Ninja.objects.create(dojo=Dojo.objects.first(), first_name="Leia", last_name="Organa")
+Ninja.objects.create(dojo=Dojo.objects.first(), first_name="Akira", last_name="Kurosawa")
+Dojo.objects.all()
+Dojo.objects.all().id
+A = Dojo.objects.all()
+for x in A:
+    print x.id
+Ninja.objects.create(dojo=Dojo.objects.get(id=5), first_name="Fred", last_name="Flintstone")
+Ninja.objects.create(dojo=Dojo.objects.get(id=5), first_name="Wilma", last_name="Flintstone")
+Ninja.objects.create(dojo=Dojo.objects.get(id=5), first_name="Pebbles", last_name="Flintstone")
+Ninja.objects.create(dojo=Dojo.objects.get(id=6), first_name="Tony", last_name="Soprano")
+Ninja.objects.create(dojo=Dojo.objects.get(id=6), first_name="Keyser", last_name="Soze")
+Ninja.objects.create(dojo=Dojo.objects.get(id=6), first_name="Rick", last_name="Blaine")
+N1 = Ninja.objects.filter(dojo=4)
+for n in N1:
+    print n.first_name, n.last_name
+N2 = Ninja.objects.filter(dojo=6)
+for n in N2:
+    print n.first_name, n.last_name
