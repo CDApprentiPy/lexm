@@ -1,0 +1,7 @@
+{% for entry in record %}
+{% if entry.change >= 0 %}
+  <p class="green">Earned {{ entry.change }} golds from the {{ entry.choice }}! ({{entry.time}})</p>
+{% else %}
+  <p class="red">Entered a casino and lost {{entry.change}} golds... Ouch... ({{entry.time}})</p>
+{% endif %}
+{% endfor %}
