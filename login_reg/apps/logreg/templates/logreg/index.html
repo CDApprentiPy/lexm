@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  <title>Login &amp; Reg | Home</title>
+</head>
+<body>
+  <form action="/register" method="POST">
+    {% csrf_token %}
+    {{ r_form }}
+    <input type="submit" name="" value="Register">
+  </form>
+  <form action="/login" method="POST">
+    {% csrf_token %}
+    {{ l_form }}
+    <input type="submit" name="" value="Login">
+  </form>
+</body>
+</html>
