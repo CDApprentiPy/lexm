@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  <title>Edit Users {{ id }}</title>
+</head>
+<body>
+  <main>
+    <h1>Edit User {{ id }}</h1>
+    <form action="/users/{{id}}/" method="POST">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" name="" value="Update">
+    </form>
+    <button><a href="/users">Go Back</a></button>
+  </main>
+</body>
+</html>
