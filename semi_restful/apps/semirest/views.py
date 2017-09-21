@@ -5,7 +5,11 @@ from .models import User
 from django.shortcuts import render, redirect
 
 def index(request):
-    return render(request, "semirest/index.html")
+    users = User.objects.all()
+    context = {
+        "users": users
+    }
+    return render(request, "semirest/index.html", context)
 
 def new(request):
     form = UserForm()
@@ -47,19 +51,24 @@ def create(request):
     new_user.save()
     return redirect("/users/" + str(new_user.id))
 
-def destroy(request):
-    return redirect("/users/")
+def destroy(request, id):
+    delete_me = User.objects.get(id=id)
+    delete_me.delete()
+    return redirect("/users")
 
 def update(request, id):
-    post = request.POST
-    fname = post.get('first_name')
-    lname = post.get('last_name')
-    mail = post.get('email')
-    print "updating..."
-    print fname, lname, mail
-    update_user = User.objects.get(id=id)
-    update_user.first_name = fname
-    update_user.last_name = lname
-    update_user.email = mail
-    update_user.save()
-    return redirect("/users/" + str(id))
+    if request.method == "POST":
+        post = request.POST
+        fname = post.get('first_name')
+        lname = post.get('last_name')
+        mail = post.get('email')
+        print "updating..."
+        print fname, lname, mail
+        update_user = User.objects.get(id=id)
+        update_user.first_name = fname
+        update_user.last_name = lname
+        update_user.email = mail
+        update_user.save()
+        return redirect("/users/" + str(id))
+    else:
+        return redirect("/users/")
