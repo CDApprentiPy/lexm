@@ -1,0 +1,12 @@
+{% extends 'user_dash/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main>
+  <form action="/login" method="POST">
+  {% csrf_token %}
+  {% crispy form %}
+  <input type="submit" name="" value="Sign In">
+</form>
+</main>
+{% endblock %}
