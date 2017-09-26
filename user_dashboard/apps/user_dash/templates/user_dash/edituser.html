@@ -1,0 +1,18 @@
+{% extends 'user_dash/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main>
+  <div>
+    <div>
+      {% crispy form1 %}
+    </div>
+    <div>
+      {% crispy form2 %}
+    </div>
+  </div>
+  <div>
+    {% crispy form3 %}
+  </div>
+</main>
+{% endblock %}

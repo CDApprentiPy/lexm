@@ -20,6 +20,7 @@ class User(models.Model):
 class Message(models.Model):
     message = models.TextField()
     user = models.ForeignKey(User, related_name="messages")
+    for_user = models.ForeignKey(User, related_name="wall_msgs")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

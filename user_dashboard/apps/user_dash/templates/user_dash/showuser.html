@@ -1,0 +1,30 @@
+{% extends 'user_dash/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main>
+  {% if no_user %}
+    <h2>User {{id}} does not exist!</h2>
+  {% else %}
+    <h3>{{user.first_name}} {{user.last_name}}</h3>
+    <table>
+      <tr>
+        <th>Registered at:</th>
+        <td>{{user.created_at}}</td>
+      </tr>
+      <tr>
+        <th>User ID:</th>
+        <td>{{user.id}}</td>
+      </tr>
+      <tr>
+        <th>Email address:</th>
+        <td>{{user.email}}</td>
+      </tr>
+      <tr>
+        <th>Description:</th>
+        <td>{{user.description}}</td>
+      </tr>
+    </table>
+  {% endif %}
+</main>
+{% endblock %}

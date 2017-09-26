@@ -1,0 +1,41 @@
+{% extends 'user_dash/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Created At</th>
+      <th>User Level</th>
+      {% if admin %}
+      <th>Actions</th>
+      {% endif %}
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{user.id}}</td>
+      <td>{{user.first_name}} {{user.last_name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.created_at}}</td>
+      <td>
+        {% if user.user_level == 9 %}
+          admin
+        {% else %}
+          normal
+        {% endif %}
+      </td>
+      {% if admin %}
+      <td>
+        <a href="/users/edit/{{user.id}}">Edit</a>
+        <a href="/users/delete/{{user.id}}">Remove</a>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+</form>
+</main>
+{% endblock %}
