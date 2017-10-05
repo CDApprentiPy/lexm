@@ -23,14 +23,10 @@
             "comments": comments,
           }
         });
-
-        // console.log(location, lang, comments);
-        // console.log(sendIt);
         socket.send(sendIt);
       });
       socket.onmessage = function(event) {
         data = JSON.parse(event.data);
-        // data = JSON.parse(JSON.parse(event.data).text);
         console.log(data.text);
         more = JSON.stringify(data.text);
         parsed = JSON.parse(more)
@@ -42,11 +38,12 @@
         }
         console.log(parsed);
         if(more){
-          outText = "You emitted the following information to the server: ";
-          outText += JSON.stringify(out) + "\n";
-          outText += "Your lucky number emitted by the server is: " + parsed.random
+          outText = "<p>You emitted the following information to the server: ";
+          outText += JSON.stringify(out) + "</p>";
+          outText += "<p>Your lucky number emitted by the server is: "
+          outText += parsed.random + "</p>"
         }
-        $('#emit').text(outText);
+        $('#emit').html(outText);
       }
     })
   </script>
