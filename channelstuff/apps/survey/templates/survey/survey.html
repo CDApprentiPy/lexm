@@ -26,22 +26,18 @@
         socket.send(sendIt);
       });
       socket.onmessage = function(event) {
-        data = JSON.parse(event.data);
-        console.log(data.text);
-        more = JSON.stringify(data.text);
-        parsed = JSON.parse(more)
-        out = {
-          "name": parsed.name,
-          "location": parsed.location,
-          "lang": parsed.lang,
-          "comments": parsed.comments,
-        }
-        console.log(parsed);
-        if(more){
-          outText = "<p>You emitted the following information to the server: ";
+        var text = JSON.parse(event.data).text;
+        if(text){
+          var out = {
+            "name": text.name,
+            "location": text.location,
+            "lang": text.lang,
+            "comments": text.comments,
+          }
+          var outText = "<p>You emitted the following information to the server: ";
           outText += JSON.stringify(out) + "</p>";
           outText += "<p>Your lucky number emitted by the server is: "
-          outText += parsed.random + "</p>"
+          outText += text.random + "</p>"
         }
         $('#emit').html(outText);
       }
