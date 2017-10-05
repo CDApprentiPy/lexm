@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  <!-- {% load static %}
+  <link rel="stylesheet" href="{% static 'random_word/css/style.css' %}" media="screen" charset="utf-8"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var socket = new WebSocket("ws://" + window.location.host + "/survey/");
+      $('#survey').submit(function(event) {
+        event.preventDefault();
+        var name = $('input[name="name"]').val();
+        var location = $('#location').val();
+        var lang = $('#lang').val();
+        var comments = $('#comments').val();
+        var sendIt = JSON.stringify({
+          "text": {
+            "name": name,
+            "location": location,
+            "lang": lang,
+            "comments": comments,
+          }
+        });
+
+        // console.log(location, lang, comments);
+        // console.log(sendIt);
+        socket.send(sendIt);
+      });
+      socket.onmessage = function(event) {
+        data = JSON.parse(event.data);
+        // data = JSON.parse(JSON.parse(event.data).text);
+        console.log(data.text);
+        more = JSON.stringify(data.text);
+        parsed = JSON.parse(more)
+        out = {
+          "name": parsed.name,
+          "location": parsed.location,
+          "lang": parsed.lang,
+          "comments": parsed.comments,
+        }
+        console.log(parsed);
+        if(more){
+          outText = "You emitted the following information to the server: ";
+          outText += JSON.stringify(out) + "\n";
+          outText += "Your lucky number emitted by the server is: " + parsed.random
+        }
+        $('#emit').text(outText);
+      }
+    })
+  </script>
+  <title>Survey Form</title>
+</head>
+<body>
+  <div id="emit"></div>
+  <form id="survey" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <label for="name">Your Name:</label>
+      <input name="name" type="text" />
+      <label for="location">Dojo Location:</label>
+      <select id="location" name="location">
+        <option value="San Jose">San Jose</option>
+        <option value="Seattle">Seattle</option>
+        <option value="LA">LA</option>
+        <option value="Dallas">Dallas</option>
+      </select>
+      <label for="lang"></label>
+      <select id="lang" name="lang">
+        <option value="C#">C#</option>
+        <option value="Java">Java</option>
+        <option value="Javascript">Javascript</option>
+        <option value="Python">Python</option>
+      </select>
+      <label for="comments">Comments</label>
+      <textarea cols="30" id="comments" name="comments" rows="10"></textarea>
+      <input name="submit" type="submit" value="Submit"/>
+    </fieldset>
+  </form>
+</body>
+</html>

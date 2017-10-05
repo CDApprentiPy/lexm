@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      console.log("I'm here!")
+      var socket = new WebSocket("ws://" + window.location.host + "/stuff/");
+      socket.onmessage = function(e) {
+        console.log(JSON.parse(e.data).count);
+        $('#count').text(JSON.parse(e.data).count);
+      }
+      $('button').click(function() {
+        socket.send('hello, cruel world');
+      })
+    })
+  </script>
+  <title>Click Me!</title>
+</head>
+<body>
+  <button>Click Me!</button>
+  <p>count goes here: <span id="count"></span></p>
+</body>
+</html>
